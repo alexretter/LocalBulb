@@ -2,39 +2,56 @@
 //  PrivateMessageTableViewController.swift
 //  LocalBulb
 //
-//  Created by Alex Retter on 3/5/16.
+//  Created by Alex Retter on 3/22/16.
 //  Copyright © 2016 ReGroup. All rights reserved.
 //
 
 import UIKit
 
 class PrivateMessageTableViewController: UITableViewController {
-
+    
+    var recipient: String?
+   
+    @IBOutlet weak var messageTextField: UITextField!
+    
+    var messages: [Message] {
+        return MessageController.sharedInstance.messages.filter({$0.receiver == (recipient ?? "") || ($0.receiver == MessageController.sharedInstance.sender && $0.sender == (recipient ?? ""))})
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableView", name: "messagesChanged", object: nil)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+    
+    func reloadTableView() {
+        tableView.reloadData()
     }
-
+    
+    // MARK: - Table view data source
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return messages.count
+    }
+    
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("messageCell", forIndexPath: indexPath)
+        
+        cell.textLabel?.text = "\(messages[indexPath.row].sender): \(messages[indexPath.row].text)"
+        
+        return cell
+    }
+    
+    @IBAction func sendButtonTapped(sender: AnyObject) {
+        if let receiver = recipient {
+            MessageController.createMessage(receiver, text: messageTextField.text!)
+        }
     }
 
     /*

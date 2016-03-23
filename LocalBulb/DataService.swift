@@ -10,9 +10,10 @@
 import Foundation
 import Firebase
 
-let URL_BASE = "https://devslopes-showcase.firebaseio.com"
+let URL_BASE = "dazzling-torch-8065.firebaseIO.com"
 
 class DataService {
+    
     static let ds = DataService()
     
     private var _REF_BASE = Firebase(url: "\(URL_BASE)")

@@ -7,17 +7,30 @@
 //
 
 import UIKit
+import Firebase
+import CoreLocation
 
 class FeedTableViewController: UITableViewController {
+    
+    var posts: [String: String] = [String: String]()
+    
+    let locationManager = CLLocationManager()
+    var currLocation : CLLocationCoordinate2D?
 
+    var ref = Firebase(url: URL_BASE)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ref.observeEventType(.Value, withBlock: { snapshot in
+        
+            self.posts = snapshot.value.objectForKey("Posts") as! [String: String]
+            print(self.posts)
+            self.tableView.reloadData()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        })
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,23 +42,31 @@ class FeedTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return posts.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        
+        var keys: Array = Array(self.posts.keys)
+        
+        cell.textLabel?.text = posts[keys[indexPath.row]] as String!
+        
+        
         return cell
     }
-    */
+    
+    @IBAction func logoutButtonTapped(sender: AnyObject) {
+    
+       ref.unauth()
+        
+    }
 
     /*
     // Override to support conditional editing of the table view.

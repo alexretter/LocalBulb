@@ -9,7 +9,7 @@
 
 import UIKit
 
-class MaterialTextField: UITextField {
+class MaterialTextField: UITextField{
 
     override func awakeFromNib() {
         layer.cornerRadius = 2.0

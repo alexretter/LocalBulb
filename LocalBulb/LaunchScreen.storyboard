@@ -17,19 +17,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="89510111027717.560f00c6e6b86" translatesAutoresizingMaskIntoConstraints="NO" id="TtJ-a7-6kf">
-                                <rect key="frame" x="207" y="83" width="186" height="222"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="222" id="Qcf-Pf-Ib3"/>
-                                    <constraint firstAttribute="width" constant="186" id="wHr-9i-NIK"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="89510111027717.560f00c6e6b86" translatesAutoresizingMaskIntoConstraints="NO" id="jgJ-7X-FUZ">
+                                <rect key="frame" x="213" y="94" width="174" height="207"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.34138366936986531" green="0.51265784718536955" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="TtJ-a7-6kf" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="0MG-c5-caO"/>
-                            <constraint firstItem="TtJ-a7-6kf" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="63" id="iBK-Nn-AY1"/>
-                        </constraints>
+                        <color key="backgroundColor" red="0.69803921568627447" green="0.77254901960784317" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
